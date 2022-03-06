@@ -27,8 +27,24 @@ class EmployeeList extends CI_Controller
 
     public function index()
     {
-        $data['result'] = $this->user_model->getAllEmployee();
-        $this->load->view('employeeList', $data);
+
+        if ($this->session->userdata('id')) {
+            $data['result'] = $this->user_model->getAllEmployee();
+            $this->load->view('employeeList', $data);
+        } else {
+            redirect(base_url());
+        }
+
+    }
+
+    public function editinfo()
+    {
+
+        $id = $this->uri->segment(3);
+        $data['result'] = $this->user_model->getEmployeeData($id);
+
+        //print_r($data[0]->userName);
+        $this->load->view('update_employeeList', $data);
 
     }
 
@@ -36,17 +52,35 @@ class EmployeeList extends CI_Controller
     {
         $data = array();
         $data["userName"] = $this->input->post('userName');
-        $data["password"] = $this->input->post('password');
-        //$data["repassword"] = $this->input->post('repassword');
         $data["employeeID"] = $this->input->post('employeeID');
         $data["email"] = $this->input->post('email');
         $data["number"] = $this->input->post('number');
 
-        $result = $this->user_model->insertinfo($data);
+        $id = $this->uri->segment(3);
+        $result = $this->user_model->updatinfo($id, $data);
+
+        // print_r($id);
+        // print_r($data);
+        // die();
 
         if ($result) {
 
-            redirect(base_url());
+            redirect("employeeList");
+
+        }
+
+    }
+
+    public function deleteinfo()
+    {
+
+        $id = $this->input->post("id");
+
+        // print_r($id);
+        // die();
+        $result = $this->user_model->deleteinfo($id);
+        if ($result) {
+            echo "success";
 
         }
 
