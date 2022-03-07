@@ -47,4 +47,14 @@ class User_model extends CI_Model
 
     }
 
+    public function checkinfo($data)
+    {
+
+        $this->db->where('employeeID', $data["employeeID"]);
+        $this->db->or_where('email', $data["email"]);
+        $query = $this->db->get('userinfo');
+        return $query->result();
+
+    }
+
 }

@@ -39,12 +39,16 @@ class EmployeeList extends CI_Controller
 
     public function editinfo()
     {
+        if ($this->session->userdata('id') && $this->session->userdata('admin')) {
 
-        $id = $this->uri->segment(3);
-        $data['result'] = $this->user_model->getEmployeeData($id);
+            $id = $this->uri->segment(3);
+            $data['result'] = $this->user_model->getEmployeeData($id);
 
-        //print_r($data[0]->userName);
-        $this->load->view('update_employeeList', $data);
+            //print_r($data[0]->userName);
+            $this->load->view('update_employeeList', $data);
+        } else {
+            redirect(base_url());
+        }
 
     }
 

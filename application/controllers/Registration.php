@@ -40,13 +40,31 @@ class Registration extends CI_Controller
         $data["employeeID"] = $this->input->post('employeeID');
         $data["email"] = $this->input->post('email');
         $data["number"] = $this->input->post('number');
-
         $result = $this->user_model->insertinfo($data);
 
         if ($result) {
 
             redirect("employeeList");
 
+        }
+
+    }
+
+    public function check_user()
+    {
+        $data = array();
+
+        $data["employeeID"] = $this->input->post('employeeID');
+        $data["email"] = $this->input->post('email');
+
+        $result = $this->user_model->checkinfo($data);
+
+        if ($result) {
+
+            echo true;
+
+        } else {
+            echo false;
         }
 
     }

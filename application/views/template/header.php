@@ -23,6 +23,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <body>
 
     <div class="container-fluid p-5 bg-primary text-white text-center">
-        <h1>My First Bootstrap Page</h1>
-        <p><?php echo $this->session->userdata('login'); ?></p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="<?php echo base_url() ?>employeeList" class="btn btn-danger logout">LOGO</a>
+                </div>
+                <div class="col-sm-8">
+                    <h1>My First Bootstrap Page</h1>
+                    <p><?php echo $this->session->userdata('login'); ?></p>
+                </div>
+                <div class="col-sm-2">
+                    <?php if ($this->session->userdata('id')) {?>
+                    <a href="<?php echo base_url() ?>login/logout" class="btn btn-danger logout">Logout</a>
+                    <?php }?>
+                </div>
+            </div>
+        </div>
+
     </div>

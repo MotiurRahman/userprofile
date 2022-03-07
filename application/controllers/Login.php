@@ -47,12 +47,20 @@ class Login extends CI_Controller
         if (!empty($result)) {
             $this->session->set_userdata('login', "Login User: " . $result[0]->userName);
             $this->session->set_userdata('id', $result[0]->id);
+            $this->session->set_userdata('admin', $result[0]->admin);
             redirect("employeeList", $result);
 
         } else {
             $this->session->set_userdata('login', 'User Name or Password did not match. Please try again');
             redirect(base_url());
         }
+
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        redirect(base_url());
 
     }
 }

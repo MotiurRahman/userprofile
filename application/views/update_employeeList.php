@@ -1,7 +1,7 @@
 <?php include "template/header.php"?>
 
 <div class="container mt-3">
-    <h2>Stacked form</h2>
+    <h2 class="text-center">Update your information</h2>
     <form action="<?php echo base_url(); ?>employeeList/updateinfo/<?php echo $result[0]->id ?>" method="POST">
         <div class="mb-3 mt-3">
             <label for="userName">User Name:</label>
